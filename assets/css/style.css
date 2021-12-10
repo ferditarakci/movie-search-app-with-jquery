@@ -1,0 +1,340 @@
+*,
+*::before,
+*::after {
+  margin: 0;
+  padding: 0;
+  outline: 0;
+  -webkit-box-sizing: border-box;
+          box-sizing: border-box;
+}
+
+body {
+  /* Genel yazı satır aralığını 1.5em olarak ayarlıyoruz. */
+  line-height: 1.5;
+  /* Yatay scrollbar çıkmaması için scrollbar'ı gizliyoruz. */
+  overflow-x: hidden;
+  /* Sayfa içerik yoğunluğuna göre görünür/gizlenir olan scrollbar'dan dolayı sayfanın sağa sola hareket etmesini engellemek amaçlı olarak dikey scrollbar'ı devamlı görünür yapıyoruz. */
+  overflow-y: scroll;
+}
+
+/* Font tanımımızı yapıyoruz */
+body, h1, h2, h3, h4, h5, h6,
+input, select, textarea, button {
+  font-family: "Roboto", sans-serif;
+}
+
+/* Sayfamızın, ekran genişliğimize göre ortalı bir şekilde görüntüleyebilmek için sabit bir genişlik verip dış kenarlarından ortalıyoruz. */
+.container {
+  width: 1100px;
+  margin: 20px auto;
+  padding: 20px 40px;
+}
+.container::before, .container::after {
+  overflow: hidden;
+  visibility: hidden;
+  display: block;
+  width: 0;
+  height: 0;
+  content: ".";
+}
+.container::after {
+  clear: both;
+}
+
+/* H1 olarak eklediğimiz sayfa başlığımızın görünümünü ayarlıyoruz. */
+.page-title {
+  margin-bottom: 20px;
+  padding-bottom: 10px;
+  line-height: 1.4;
+  font-size: 26px;
+  font-weight: 700;
+  border-bottom: 1px solid #dadada;
+}
+
+/* Arama form kutusu ve butonunun genel görünümünü ayarlıyoruz. */
+#search {
+  position: relative;
+  z-index: 1;
+  float: left;
+  width: 100%;
+  margin-bottom: 20px;
+  padding-bottom: 20px;
+  border-bottom: 1px solid #dadada;
+}
+#search .label {
+  position: relative;
+  float: left;
+  width: 400px;
+}
+#search .prev-search {
+  position: absolute;
+  top: 100%;
+  left: 0;
+  width: 100%;
+  margin: -2px 0 0;
+  padding: 0;
+  list-style: none;
+  visibility: hidden;
+  opacity: 0;
+  border: 1px solid #dadada;
+  background-color: #fff;
+  -webkit-box-shadow: 0px 1px 8px 0px rgba(0, 0, 0, 0.1);
+          box-shadow: 0px 1px 8px 0px rgba(0, 0, 0, 0.1);
+  -webkit-transform: translateY(50px);
+          transform: translateY(50px);
+  -webkit-transition: all 0.3s linear;
+  transition: all 0.3s linear;
+}
+#search .prev-search:empty {
+  display: none !important;
+}
+#search .prev-search li {
+  position: relative;
+  padding: 10px 40px 8px 20px;
+  line-height: 1.4;
+  font-size: 16px;
+  font-weight: 400;
+  cursor: pointer;
+}
+#search .prev-search li:nth-child(even) {
+  background-color: #f3f3f3;
+}
+#search .prev-search li .remove {
+  position: absolute;
+  top: 0;
+  right: 0;
+  width: 40px;
+  line-height: 40px;
+  font-size: 20px;
+  font-weight: 700;
+  color: #d00000;
+  text-align: center;
+  cursor: pointer;
+}
+#search .focus .prev-search {
+  visibility: visible;
+  opacity: 1;
+  -webkit-transform: translateY(0);
+          transform: translateY(0);
+}
+#search input[type="text"] {
+  float: left;
+  width: 100%;
+  height: 42px;
+  padding: 5px 20px;
+  line-height: 30px;
+  font-size: 16px;
+  font-weight: 400;
+  border: 1px solid #dadada;
+  border-radius: 4px;
+  background-color: #fff;
+  -webkit-box-shadow: 0px 1px 8px 0px rgba(0, 0, 0, 0.1);
+          box-shadow: 0px 1px 8px 0px rgba(0, 0, 0, 0.1);
+  -webkit-transition: all 0.3s linear;
+  transition: all 0.3s linear;
+}
+#search input[type="text"]:focus {
+  -webkit-box-shadow: 0px 1px 8px 0px rgba(0, 0, 0, 0.2);
+          box-shadow: 0px 1px 8px 0px rgba(0, 0, 0, 0.2);
+}
+#search button {
+  overflow: hidden;
+  position: relative;
+  float: left;
+  width: 100px;
+  height: 42px;
+  margin-left: 10px;
+  padding: 5px 20px;
+  line-height: 30px;
+  font-size: 16px;
+  font-weight: 400;
+  color: #fff;
+  text-align: center;
+  cursor: pointer;
+  border: 1px solid #0082de;
+  border-radius: 4px;
+  background-color: #0095ff;
+  -webkit-box-shadow: 0px 1px 8px 0px rgba(0, 0, 0, 0.1);
+          box-shadow: 0px 1px 8px 0px rgba(0, 0, 0, 0.1);
+  -webkit-transition: all 0.3s linear;
+  transition: all 0.3s linear;
+}
+#search button::after {
+  position: absolute;
+  left: 0;
+  top: 0;
+  width: 0;
+  height: 100%;
+  content: "";
+  background-color: rgba(0, 0, 0, 0.05);
+  -webkit-transition: all 0.3s linear;
+  transition: all 0.3s linear;
+}
+#search button:hover::after {
+  width: 100%;
+}
+#search button[disabled] {
+  pointer-events: none;
+  border-color: #a9a9a9;
+  background-color: #a9a9a9;
+}
+
+/* Api'mizden dönen içeriğimizin nasıl görüneceğini belirliyoruz. */
+#movies {
+  float: left;
+  width: 103%;
+  margin-left: -3%;
+}
+#movies .item {
+  overflow: hidden;
+  position: relative;
+  float: left;
+  width: 30.33333333333333333333%;
+  margin-left: 3%;
+  margin-bottom: 30px;
+  padding-bottom: 5px;
+  border-radius: 12px;
+  -webkit-box-shadow: 0px 3px 27px 0px rgba(22, 22, 22, 0.17);
+          box-shadow: 0px 3px 27px 0px rgba(22, 22, 22, 0.17);
+  -webkit-transition: all 0.3s linear;
+  transition: all 0.3s linear;
+}
+#movies a {
+  color: inherit;
+  text-decoration: none;
+}
+#movies .image {
+  overflow: hidden;
+  position: relative;
+  display: block;
+  margin-bottom: 20px;
+  padding-bottom: 142%;
+  background: #f1f1f1 url(../images/loading.svg) no-repeat 50%;
+  background-size: 32px auto;
+}
+#movies img {
+  position: absolute;
+  top: 0;
+  left: 0;
+  display: block !important;
+  width: 100%;
+  height: 100%;
+  border: 0;
+  opacity: 1 !important;
+  -o-object-fit: cover;
+     object-fit: cover;
+  -webkit-transition: all 0.3s linear;
+  transition: all 0.3s linear;
+  -webkit-backface-visibility: hidden;
+          backface-visibility: hidden;
+  /* Webkit tarayıcılarda transform efektine bağlı olarak bozulmaları engelliyoruz. */
+}
+#movies h2 {
+  margin-bottom: 20px;
+  padding: 0 10px;
+  line-height: 1.2;
+  font-size: 16px;
+  font-weight: 700;
+  color: #484848;
+  text-align: center;
+}
+#movies h2 a {
+  overflow: hidden;
+  display: block;
+  white-space: nowrap;
+  text-overflow: ellipsis;
+}
+#movies .rating {
+  position: absolute;
+  right: 0;
+  bottom: 0;
+  padding: 5px 15px;
+  line-height: 1;
+  font-size: 12px;
+  color: #fff;
+  border-radius: 3px 0 0 0;
+  background-color: #0095ff;
+}
+#movies .rating-bar {
+  position: absolute;
+  left: 0;
+  bottom: 0;
+  width: 100%;
+  height: 10px;
+  background-color: #d8d8d8;
+  -webkit-box-shadow: inset 0px 0px 7px rgba(0, 0, 0, 0.1);
+          box-shadow: inset 0px 0px 7px rgba(0, 0, 0, 0.1);
+}
+#movies .rating-bar span {
+  position: absolute;
+  left: 0;
+  top: 0;
+  width: 100%;
+  height: 100%;
+  -webkit-transition: all 0.3s linear 2s;
+  transition: all 0.3s linear 2s;
+  -webkit-box-shadow: inset 0px 0px 7px rgba(0, 0, 0, 0.1);
+          box-shadow: inset 0px 0px 7px rgba(0, 0, 0, 0.1);
+}
+#movies .rating-bar span.red {
+  background-color: #d00000;
+}
+#movies .rating-bar span.yellow {
+  background-color: #ffda00;
+}
+#movies .rating-bar span.green {
+  background-color: #00ab00;
+}
+#movies .item:hover {
+  -webkit-box-shadow: 0px 3px 30px 5px rgba(22, 22, 22, 0.27);
+          box-shadow: 0px 3px 30px 5px rgba(22, 22, 22, 0.27);
+}
+#movies .item:hover img {
+  -webkit-transform: scale(1.03);
+          transform: scale(1.03);
+}
+
+@media (max-width: 1100px) {
+  .container {
+    width: 98%;
+    padding: 20px 30px;
+  }
+}
+@media (max-width: 768px) {
+  .container {
+    padding: 20px;
+  }
+
+  #search .label {
+    width: 75%;
+  }
+  #search button {
+    width: 23%;
+    margin-left: 2%;
+  }
+
+  #movies .item {
+    width: 47%;
+  }
+}
+@media (max-width: 480px) {
+  #search .label {
+    width: 70%;
+  }
+  #search button {
+    width: 27%;
+    margin-left: 3%;
+  }
+
+  #movies {
+    width: 105%;
+    margin-left: -5%;
+  }
+  #movies .item {
+    width: 45%;
+    margin-left: 5%;
+  }
+  #movies h2 {
+    font-size: 14px;
+  }
+}

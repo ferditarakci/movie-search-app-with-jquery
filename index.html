@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="tr">
+<head>
+	<meta charset="utf-8" />
+	<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+	<meta http-equiv="X-UA-Compatible" content="IE=Edge" />
+	<title>IMDb'de Film Ara</title>
+
+	<link href="assets/css/style.css" rel="stylesheet" />
+	<link href="//fonts.googleapis.com/css?family=Roboto:400,700&display=swap&subset=latin-ext" rel="stylesheet" />
+
+	<script src="//ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
+	<script src="assets/js/jquery.lazyload.min.js"></script>
+	<script src="assets/js/common.js"></script>
+</head>
+<body>
+
+	<div class="container">
+		<h1 class="page-title">IMDb'de FİLM ARA</h1>
+
+		<form id="search">
+			<div class="label">
+				<input placeholder="Aranacak kelime..." value="the matrix" type="text" autocomplete="off" required />
+				<ul class="prev-search"></ul>
+			</div>
+			<button type="submit">Ara</button>
+		</form>
+
+		<div id="movies"></div>
+	</div>
+
+</body>
+</html>
